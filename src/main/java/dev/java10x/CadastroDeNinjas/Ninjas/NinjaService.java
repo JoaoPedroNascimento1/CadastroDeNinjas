@@ -26,8 +26,14 @@ public class NinjaService {
     return ninjaPorId.orElse(null);
   }
 
+  // Criar um novo ninja
   public NinjaModel criarNinja(NinjaModel ninja) {
     return ninjaRepository.save(ninja);
+  }
+
+  // Deletar o ninja - Tem q ser um metodo VOID
+  public void DeletarNinja(Long id) {
+    ninjaRepository.deleteById(id);
   }
 
 }
