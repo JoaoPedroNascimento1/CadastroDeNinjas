@@ -32,7 +32,7 @@ public class NinjaService {
   }
 
   // Deletar o ninja - Tem q ser um metodo VOID
-  public void DeletarNinja(Long id) {
+  public void deletarNinja(Long id) {
     ninjaRepository.deleteById(id);
   }
 
