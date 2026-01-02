@@ -11,7 +11,7 @@ import java.util.List;
 public class NinjaController {
 
   // Injecao de metodos/ injetar dependencia
-  private NinjaService ninjaService;
+  private final NinjaService ninjaService;
 
   public NinjaController(NinjaService ninjaService) {
     this.ninjaService = ninjaService;
