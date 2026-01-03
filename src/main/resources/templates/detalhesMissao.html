@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalhes da Missão</title>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(
+        rgba(0,0,0,0.7),
+        rgba(0,0,0,0.7)
+      ),
+      url("https://wallpapers.com/images/hd/naruto-konoha-background-0y3j8p0w8j3v5z5g.jpg");
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 40px;
+      color: #fff;
+    }
+
+    .card {
+      max-width: 600px;
+      margin: auto;
+      background: rgba(20, 20, 20, 0.9);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.8);
+      text-align: center;
+    }
+
+    h1 {
+      color: #ff8c00;
+      margin-bottom: 20px;
+    }
+
+    .info {
+      margin: 12px 0;
+      font-size: 18px;
+    }
+
+    img {
+      margin-top: 15px;
+      border-radius: 12px;
+      width: 140px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.7);
+    }
+
+    .btn-voltar {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 10px 20px;
+      background: #ff8c00;
+      color: #000;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn-voltar:hover {
+      background: #e67600;
+    }
+
+    .sem-ninja {
+      font-style: italic;
+      color: #ccc;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>📜 Detalhes da Missão</h1>
+
+  <div class="info">
+    <strong>ID:</strong>
+    <span th:text="${missao.id}"></span>
+  </div>
+
+  <div class="info">
+    <strong>Nome:</strong>
+    <span th:text="${missao.nome}"></span>
+  </div>
+
+  <div class="info">
+    <strong>Dificuldade:</strong>
+    <span th:text="${missao.dificuldade}"></span>
+  </div>
+
+  <div class="info" th:if="${missao.ninja != null}">
+    <strong>Ninja:</strong><br>
+    <span th:text="${missao.ninja.nome}"></span><br>
+    <img th:src="${missao.ninja.imgUrl}">
+  </div>
+
+  <div class="info sem-ninja" th:if="${missao.ninja == null}">
+    Esta missão não possui ninja atribuído
+  </div>
+
+  <a class="btn-voltar" th:href="@{/missoes/ui/listar}">
+    ⬅ Voltar para Lista
+  </a>
+</div>
+
+</body>
+</html>
