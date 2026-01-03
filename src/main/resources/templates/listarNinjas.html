@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Ninjas</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+      color: #fff;
+      padding: 40px 60px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff9800;
+      margin-bottom: 30px;
+      font-size: 2.4rem;
+      text-shadow: 0 0 10px rgba(255, 152, 0, 0.7);
+    }
+
+    /* BOTÃO ADICIONAR */
+    .top-left {
+      position: absolute;
+      top: 25px;
+      left: 30px;
+    }
+
+    .btn-adicionar {
+      background: linear-gradient(90deg, #ff9800, #ff5722);
+      padding: 12px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      color: #000;
+      box-shadow: 0 0 15px rgba(255, 152, 0, 0.8);
+      transition: all 0.3s ease;
+    }
+
+    .btn-adicionar:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 25px rgba(255, 152, 0, 1);
+    }
+
+    /* TABELA */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(20, 20, 20, 0.95);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0,0,0,0.7);
+    }
+
+    thead {
+      background: linear-gradient(90deg, #ff9800, #ff5722);
+      color: #000;
+    }
+
+    th, td {
+      padding: 16px 14px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    th {
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+    }
+
+    tbody tr {
+      transition: background 0.3s ease;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #1e1e1e;
+    }
+
+    tbody tr:hover {
+      background: #2a2a2a;
+    }
+
+    /* IMAGEM */
+    img {
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      border: 3px solid #ff9800;
+      object-fit: cover;
+      box-shadow: 0 0 10px rgba(255, 152, 0, 0.6);
+    }
+
+    /* MISSÕES */
+    .missao {
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .sem-missao {
+      font-style: italic;
+      color: #aaa;
+    }
+
+    /* BOTÕES */
+    a {
+      padding: 8px 18px;
+      border-radius: 22px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 4px;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .detalhes {
+      background: #2196f3;
+      color: #fff;
+    }
+
+    .detalhes:hover {
+      background: #1e88e5;
+      transform: scale(1.05);
+    }
+
+    .alterar {
+      background: #ff9800;
+      color: #000;
+    }
+
+    .alterar:hover {
+      background: #ffa726;
+      transform: scale(1.05);
+    }
+
+    .deletar {
+      background: #b71c1c;
+      color: #fff;
+    }
+
+    .deletar:hover {
+      background: #d32f2f;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="top-left">
+  <a class="btn-adicionar" th:href="@{/ninjas/ui/adicionar}">+ Adicionar Ninja</a>
+</div>
+
+<h1>Lista de Ninjas</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Imagem</th>
+    <th>Nome</th>
+    <th>Idade</th>
+    <th>Rank</th>
+    <th>Missões</th>
+    <th>Ações</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr th:each="ninja : ${ninjas}">
+    <td><img th:src="${ninja.imgUrl}"></td>
+    <td th:text="${ninja.nome}"></td>
+    <td th:text="${ninja.idade}"></td>
+    <td th:text="${ninja.rank}"></td>
+
+    <td class="missao">
+        <span th:if="${ninja.missoes}">
+          <strong th:text="${ninja.missoes.nome}"></strong><br>
+          Dificuldade:
+          <span th:text="${ninja.missoes.dificuldade}"></span>
+        </span>
+      <span th:if="${ninja.missoes == null}" class="sem-missao">
+          Sem missões cadastradas
+        </span>
+    </td>
+
+    <td>
+      <a class="detalhes" th:href="@{/ninjas/ui/listar/{id}(id=${ninja.id})}">Detalhes</a>
+      <a class="alterar" th:href="@{/ninjas/ui/alterar/{id}(id=${ninja.id})}">Alterar</a>
+      <a class="deletar"
+         th:href="@{/ninjas/ui/deletar/{id}(id=${ninja.id})}"
+         onclick="return confirm('Deseja deletar este ninja?')">
+        Deletar
+      </a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

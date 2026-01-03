@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Adicionar Ninja</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+    }
+
+    .blur {
+      position: fixed;
+      inset: 0;
+      backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.6);
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      background: #1c1c1c;
+      padding: 40px;
+      border-radius: 22px;
+      width: 650px;
+      color: white;
+      box-shadow: 0 0 40px orange;
+    }
+
+    h2 {
+      text-align: center;
+      color: orange;
+      margin-bottom: 30px;
+    }
+
+    label {
+      color: orange;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 14px;
+    }
+
+    .missao {
+      margin-top: 20px;
+      padding: 15px;
+      background: #2a2a2a;
+      border-radius: 14px;
+    }
+
+    .botoes {
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    button, a {
+      padding: 12px 32px;
+      border-radius: 30px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .salvar {
+      background: #1e90ff;
+      color: white;
+    }
+
+    .voltar {
+      background: orange;
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="blur"></div>
+
+<div class="overlay">
+  <div class="card">
+
+    <h2>Novo Ninja</h2>
+
+    <form th:action="@{/ninjas/ui/salvar}" method="post">
+
+      <label>Nome</label>
+      <input type="text" name="nome" required>
+
+      <label>Idade</label>
+      <input type="number" name="idade" required>
+
+      <label>Email</label>
+      <input type="email" name="email" required>
+
+      <label>Rank</label>
+      <input type="text" name="rank" required>
+
+      <label>Imagem (URL)</label>
+      <input type="text" name="imgUrl">
+
+      <div class="missao">
+        <label>ID da Missão</label>
+        <input type="number" name="missaoId">
+      </div>
+
+      <div class="botoes">
+        <a class="voltar" th:href="@{/ninjas/ui/listar}">Voltar</a>
+        <button class="salvar" type="submit">Salvar</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

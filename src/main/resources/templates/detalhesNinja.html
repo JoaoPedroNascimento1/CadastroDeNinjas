@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title>Detalhes do Ninja</title>
+
+  <style>
+    /* ===== RESET ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* ===== FUNDO ===== */
+    body {
+      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+      color: #f5f5f5;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* ===== CARD ===== */
+    .card {
+      background-color: #141414;
+      border-radius: 18px;
+      max-width: 900px;
+      width: 100%;
+      padding: 30px;
+      box-shadow: 0 0 35px rgba(0, 0, 0, 0.9);
+    }
+
+    /* ===== TÍTULO ===== */
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2.3rem;
+      color: #ff8c00;
+      text-shadow: 0 0 12px rgba(255, 140, 0, 0.7);
+    }
+
+    /* ===== CONTEÚDO ===== */
+    .conteudo {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    /* ===== IMAGEM ===== */
+    .imagem {
+      flex: 1;
+      text-align: center;
+    }
+
+    .imagem img {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 4px solid #ff8c00;
+      box-shadow: 0 0 18px rgba(255, 140, 0, 0.9);
+      object-fit: cover;
+    }
+
+    /* ===== INFO ===== */
+    .info {
+      flex: 2;
+    }
+
+    .info p {
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+      color: #ddd;
+    }
+
+    .info strong {
+      color: #ff8c00;
+    }
+
+    /* ===== MISSÕES ===== */
+    .missao {
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 12px;
+      background-color: #1e1e1e;
+      border-left: 4px solid #ff4500;
+    }
+
+    /* ===== BOTÕES ===== */
+    .acoes {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .acoes a {
+      display: inline-block;
+      margin: 6px;
+      padding: 10px 22px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 22px;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .voltar {
+      background-color: #1e90ff;
+      color: #fff;
+    }
+
+    .voltar:hover {
+      background-color: #63b3ff;
+      box-shadow: 0 0 12px rgba(30, 144, 255, 0.8);
+    }
+
+    .editar {
+      background-color: #ff8c00;
+      color: #111;
+    }
+
+    .editar:hover {
+      background-color: #ffb347;
+      box-shadow: 0 0 12px rgba(255, 140, 0, 0.9);
+    }
+
+    .deletar {
+      background-color: #b22222;
+      color: #fff;
+    }
+
+    .deletar:hover {
+      background-color: #ff4c4c;
+      box-shadow: 0 0 14px rgba(255, 76, 76, 0.9);
+    }
+
+    /* ===== RESPONSIVO ===== */
+    @media (max-width: 768px) {
+      .conteudo {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <h1>Detalhes do Ninja</h1>
+
+  <div class="conteudo">
+    <!-- IMAGEM -->
+    <div class="imagem">
+      <img th:src="${ninja.imgUrl}">
+    </div>
+
+    <!-- INFORMAÇÕES -->
+    <div class="info">
+      <p><strong>ID:</strong> <span th:text="${ninja.id}"></span></p>
+      <p><strong>Nome:</strong> <span th:text="${ninja.nome}"></span></p>
+      <p><strong>Idade:</strong> <span th:text="${ninja.idade}"></span></p>
+      <p><strong>Email:</strong> <span th:text="${ninja.email}"></span></p>
+      <p><strong>Rank:</strong> <span th:text="${ninja.rank}"></span></p>
+
+      <!-- MISSÃO -->
+      <div class="missao" th:if="${ninja.missoes}">
+        <p><strong>Missão:</strong> <span th:text="${ninja.missoes.nome}"></span></p>
+        <p><strong>Dificuldade:</strong> <span th:text="${ninja.missoes.dificuldade}"></span></p>
+      </div>
+
+      <div class="missao" th:if="${ninja.missoes == null}">
+        <p>Este ninja não possui missões cadastradas.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- AÇÕES -->
+  <div class="acoes">
+    <a class="voltar" th:href="@{/ninjas/ui/listar}">Voltar</a>
+    <a class="editar" th:href="@{/ninjas/ui/#/{id}(id=${ninja.id})}">Editar</a>
+    <a class="deletar" th:href="@{/ninjas/ui/deletar/{id}(id=${ninja.id})}">Deletar</a>
+  </div>
+
+</div>
+
+</body>
+</html>
