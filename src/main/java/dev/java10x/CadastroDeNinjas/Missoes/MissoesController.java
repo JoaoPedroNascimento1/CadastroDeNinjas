@@ -41,7 +41,7 @@ public class MissoesController {
   }
 
   // PUT -- Mnadar uma requisição para alterar as missoes
-  @PutMapping("/alterar/{id}")
+  @PatchMapping("/alterar/{id}")
   public ResponseEntity<?> alterarMissao(@PathVariable Long id, @RequestBody MissoesDTO missoes){
     MissoesDTO missoesAlterado = missoesService.atualizarMissoes(id, missoes);
     if(missoesAlterado != null){
